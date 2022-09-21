@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/procore-metadata-view/static/css/main.073c9b0a.css",
-    "main.js": "/procore-metadata-view/static/js/main.24b8d028.js",
-    "static/js/787.d3130d88.chunk.js": "/procore-metadata-view/static/js/787.d3130d88.chunk.js",
-    "static/media/logo.svg": "/procore-metadata-view/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/procore-metadata-view/index.html",
-    "main.073c9b0a.css.map": "/procore-metadata-view/static/css/main.073c9b0a.css.map",
-    "main.24b8d028.js.map": "/procore-metadata-view/static/js/main.24b8d028.js.map",
-    "787.d3130d88.chunk.js.map": "/procore-metadata-view/static/js/787.d3130d88.chunk.js.map"
+    "main.css": "/signin/static/css/main.073c9b0a.css",
+    "main.js": "/signin/static/js/main.3810f96b.js",
+    "static/js/787.d3130d88.chunk.js": "/signin/static/js/787.d3130d88.chunk.js",
+    "index.html": "/signin/index.html",
+    "main.073c9b0a.css.map": "/signin/static/css/main.073c9b0a.css.map",
+    "main.3810f96b.js.map": "/signin/static/js/main.3810f96b.js.map",
+    "787.d3130d88.chunk.js.map": "/signin/static/js/787.d3130d88.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.24b8d028.js"
+    "static/js/main.3810f96b.js"
   ]
 }
