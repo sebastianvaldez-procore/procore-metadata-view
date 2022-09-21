@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import './App.css';
+import { useEffect } from 'react';
 import * as procoreIframeHelpers from '@procore/procore-iframe-helpers';
-import { Routes, Route, useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, NavLink } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
-import * as queryString from 'query-string'
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const queryClient = new QueryClient()
 const ProcoreIframeContext = procoreIframeHelpers.initialize();
@@ -16,57 +15,59 @@ const accessCodeState = atom({
 });
 
 
-const FetchProcoreOauthToken = code => {
-  // reach out to aws api gateway lambda authorizer
+// const FetchProcoreOauthToken = code => {
+//   // reach out to aws api gateway lambda authorizer
 
-  // api gateway sould return a JWT - IAM policy, email, /me response / full_token
+//   // api gateway sould return a JWT - IAM policy, email, /me response / full_token
 
-  const procore_token_url = `https://login.procore.com/oauth/token`
-  return useQuery('accessToken', async () => {
-    if (code !== null) {
+//   const procore_token_url = `https://login.procore.com/oauth/token`
+//   return useQuery('accessToken', async () => {
+//     if (code !== null) {
 
-      try {
-        const response = await fetch(procore_token_url, {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            code,
-            grant_type: 'authorization_code',
-            redirect_uri: 'http://localhost:3000/',
-            client_id: process.env.REACT_APP_PROCORE_CLIENT_ID,
-            client_secret: process.env.REACT_APP_PROCORE_CLIENT_SECRET
-          })
-        })
+//       try {
+//         const response = await fetch(procore_token_url, {
+//           method: 'POST',
+//           mode: 'cors',
+//           headers: {
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({
+//             code,
+//             grant_type: 'authorization_code',
+//             redirect_uri: 'http://localhost:3000/',
+//             client_id: process.env.REACT_APP_PROCORE_CLIENT_ID,
+//             client_secret: process.env.REACT_APP_PROCORE_CLIENT_SECRET
+//           })
+//         })
 
-        if (!response.code.ok) {
-          throw new Error(response.error)
-        }
-        return response.json()
-      } catch (error) {
-        throw new Error(`Could Not Get Procore Access Token: ${error}`)
-      }
-    }
-  })
-}
+//         if (!response.code.ok) {
+//           throw new Error(response.error)
+//         }
+//         return response.json()
+//       } catch (error) {
+//         throw new Error(`Could Not Get Procore Access Token: ${error}`)
+//       }
+//     }
+//   })
+// }
 
 const OauthSuccess = () => {
-  console.log('oauth success rendered')
 
   useEffect(() => {
+    console.log(`query string: ${window.location}`)
     const queryString = window.location.search;
+    console.log(`query string: ${queryString}`)
     const urlParams = new URLSearchParams(queryString);
     const accessCode = urlParams.get('code');
-
+    debugger
     if (accessCode !== '') {
       ProcoreIframeContext.authentication.notifySuccess({ accessCode });
     } else {
       console.error('Didnt fetch code.');
     }
   },[])
+  
   return <div>OauthCallBack</div>
 }
 
@@ -91,14 +92,19 @@ const Signin = () => {
     <div>
       <p>Procore Metadata View</p>
       <p>login page...</p>
-      {/* <div><button onClick={handleProcoreLogin}>Login to Procore</button></div> */}
+      <div><button onClick={handleProcoreLogin}>Login to Procore</button></div>
+      <div style={{ paddingTop: '2rem'}}>
+        <button><NavLink to='/'>Back to Homepage</NavLink></button>
+      </div>
     </div>
   )
 }
 
 const MainPage = () => {
-  // const accessCode = useRecoilValue(accessCodeState)
-
+  const accessCode = useRecoilValue(accessCodeState)
+  const jsonStyle = {
+    paddingTop: '3rem'
+  }
   // if (accessCode !== '') {
   //   // let response = FetchProcoreOauthToken(accessCode)
   // }
@@ -106,8 +112,14 @@ const MainPage = () => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
       <p>Procore Metadata View</p>
-      <p>Login coming soon, AFTER mono repo setup</p>
-      <NavLink to='/signin'>log in</NavLink>
+      <button><NavLink to='/signin'>log in</NavLink></button>
+      <div>
+        {
+          accessCode !== ''
+          ? <code style={jsonStyle}>{`Access Code: ${accessCode}`}</code>
+          : <div style={jsonStyle}><code>{JSON.stringify({"message": "metadata response renders here"}, 2, null)}</code></div>
+        }
+      </div>
     </div>
   )
 }
@@ -119,7 +131,7 @@ function App() {
         <header className="App-header">
             <Routes>
               <Route path='/' exact element={ <MainPage /> } />
-              <Route path='/signin' element={<Signin />} />
+              <Route path='/signin'exact element={<Signin />} />
               <Route path='/oauth_success' exact element={<OauthSuccess />} />
             </Routes>
         </header>
