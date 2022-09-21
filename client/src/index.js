@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <RecoilRoot basename={`${process.env.PUBLIC_URL}}`}>
+    <RecoilRoot>
       <App />
     </RecoilRoot>
     </BrowserRouter>

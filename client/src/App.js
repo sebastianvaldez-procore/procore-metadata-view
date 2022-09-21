@@ -132,7 +132,7 @@ function App() {
             <Routes>
               <Route path='/' exact element={ <MainPage /> } />
               <Route path='/signin'exact element={<Signin />} />
-              <Route path='/oauth_success' exact element={<OauthSuccess />} />
+              <Route path='/oauth_success' element={<OauthSuccess />} />
             </Routes>
         </header>
       </div>
