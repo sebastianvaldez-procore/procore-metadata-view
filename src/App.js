@@ -90,7 +90,8 @@ const Signin = () => {
   return (
     <div>
       <p>Procore Metadata View</p>
-      <div><button onClick={handleProcoreLogin}>Login to Procore</button></div>
+      <p>login page...</p>
+      {/* <div><button onClick={handleProcoreLogin}>Login to Procore</button></div> */}
     </div>
   )
 }
@@ -106,6 +107,7 @@ const MainPage = () => {
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
       <p>Procore Metadata View</p>
       <p>Login coming soon</p>
+      <NavLink to='/signin'>log in</NavLink>
     </div>
   )
 }
@@ -116,8 +118,8 @@ function App() {
       <div className="App">
         <header className="App-header">
             <Routes>
-              <Route path={`${process.env.PUBLIC_URL}/`} exact element={ <MainPage /> } />
-              <Route path='/signin' exact element={<Signin />} />
+              <Route path='/' exact element={ <MainPage /> } />
+              <Route path='/signin' element={<Signin />} />
               <Route path='/oauth_success' exact element={<OauthSuccess />} />
             </Routes>
         </header>
