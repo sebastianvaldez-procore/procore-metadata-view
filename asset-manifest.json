@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/procore-metadata-view/static/css/main.073c9b0a.css",
-    "main.js": "/procore-metadata-view/static/js/main.2443b9d9.js",
+    "main.js": "/procore-metadata-view/static/js/main.330771d7.js",
     "static/js/787.d3130d88.chunk.js": "/procore-metadata-view/static/js/787.d3130d88.chunk.js",
     "index.html": "/procore-metadata-view/index.html",
     "main.073c9b0a.css.map": "/procore-metadata-view/static/css/main.073c9b0a.css.map",
-    "main.2443b9d9.js.map": "/procore-metadata-view/static/js/main.2443b9d9.js.map",
+    "main.330771d7.js.map": "/procore-metadata-view/static/js/main.330771d7.js.map",
     "787.d3130d88.chunk.js.map": "/procore-metadata-view/static/js/787.d3130d88.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.2443b9d9.js"
+    "static/js/main.330771d7.js"
   ]
 }
