@@ -1,7 +1,7 @@
 {
   "name": "procore-metadata-view",
   "version": "0.1.0",
-  "homepage": "https://sebastianvaldez-procore.github.io/signin",
+  "homepage": "https://sebastianvaldez-procore.github.io/",
   "private": false,
   "dependencies": {
     "@procore/procore-iframe-helpers": "^0.2.1",
