@@ -60,14 +60,14 @@ const OauthSuccess = () => {
     console.log(`query string: ${queryString}`)
     const urlParams = new URLSearchParams(queryString);
     const accessCode = urlParams.get('code');
-    debugger
+    // debugger
     if (accessCode !== '') {
       ProcoreIframeContext.authentication.notifySuccess({ accessCode });
     } else {
       console.error('Didnt fetch code.');
     }
   },[])
-  
+
   return <div>OauthCallBack</div>
 }
 
