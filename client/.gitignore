@@ -26,3 +26,4 @@ yarn-error.log*
 .DS_Store
 ./client/node_modules
 ./client/build
+./client/.env
