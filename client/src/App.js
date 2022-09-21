@@ -106,7 +106,7 @@ const MainPage = () => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
       <p>Procore Metadata View</p>
-      <p>Login coming soon</p>
+      <p>Login coming soon, AFTER mono repo setup</p>
       <NavLink to='/signin'>log in</NavLink>
     </div>
   )
