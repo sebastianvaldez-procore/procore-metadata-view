@@ -96,22 +96,16 @@ const Signin = () => {
 }
 
 const MainPage = () => {
-  const accessCode = useRecoilValue(accessCodeState)
+  // const accessCode = useRecoilValue(accessCodeState)
 
-  if (accessCode !== '') {
-    // let response = FetchProcoreOauthToken(accessCode)
-  }
+  // if (accessCode !== '') {
+  //   // let response = FetchProcoreOauthToken(accessCode)
+  // }
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
       <p>Procore Metadata View</p>
       <p>Login coming soon</p>
-      {/* {
-        accessCode ? <small><code>{`AccessCode: ${accessCode}`}</code></small> : null
-      } */}
-      <div>
-        {/* <button><NavLink to='/signin'>signin</NavLink></button> */}
-      </div>
     </div>
   )
 }
@@ -122,7 +116,7 @@ function App() {
       <div className="App">
         <header className="App-header">
             <Routes>
-              <Route path='/' exact element={ <MainPage /> } />
+              <Route path={`${process.env.PUBLIC_URL}/`} exact element={ <MainPage /> } />
               <Route path='/signin' exact element={<Signin />} />
               <Route path='/oauth_success' exact element={<OauthSuccess />} />
             </Routes>
