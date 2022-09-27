@@ -114,7 +114,6 @@ const Signin = () => {
 }
 
 const MainPage = () => {
-  debugger
   const accessCode = useRecoilValue(accessCodeState)
 
   const jsonStyle = {
