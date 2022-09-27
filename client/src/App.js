@@ -61,6 +61,7 @@ const OauthCallback = () => {
 
   useEffect(() => {
     if (code !== '') {
+      console.log('oauth callback, navigating to oauth_success with', code)
       navigate('/oauth_success', { state: { accessCode: code }})
     } else {
       console.error('Didnt fetch code.');
@@ -70,13 +71,12 @@ const OauthCallback = () => {
 }
 
 const OauthSuccess = () => {
-  const navigate = useNavigate()
   const { state }  = useLocation()
   const { accessCode } = state
 
   if (accessCode !== '') {
+    console.log('oauth success, running notifySuccess', accessCode)
     ProcoreIframeContext.authentication.notifySuccess({ accessCode });
-    navigate('/')
   } else {
     console.error('Didnt fetch code.');
   }
