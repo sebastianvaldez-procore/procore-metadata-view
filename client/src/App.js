@@ -85,7 +85,6 @@ const OauthSuccess = () => {
     return () => ProcoreIframeContext.authentication.notifySuccess({ accessCode });
   }, [accessCode])
 
-  return <div>OauthSuccess</div>;
 }
 
 const Signin = () => {
