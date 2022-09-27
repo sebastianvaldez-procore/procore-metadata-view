@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect } from 'react';
 import * as procoreIframeHelpers from '@procore/procore-iframe-helpers';
-import { Routes, Route, useNavigate, NavLink } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -52,23 +52,36 @@ const accessCodeState = atom({
 //   })
 // }
 
-const OauthSuccess = () => {
+const OauthCallback = () => {
+  const navigate = useNavigate()
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const code = urlParams.get('code');
 
   useEffect(() => {
-    console.log(`query string: ${window.location}`)
-    const queryString = window.location.search;
-    console.log(`query string: ${queryString}`)
-    const urlParams = new URLSearchParams(queryString);
-    const accessCode = urlParams.get('code');
-    // debugger
-    if (accessCode !== '') {
-      ProcoreIframeContext.authentication.notifySuccess({ accessCode });
+    if (code !== '') {
+      navigate('/oauth_success', { state: { accessCode: code }})
     } else {
       console.error('Didnt fetch code.');
     }
-  },[])
+  }, [code])
 
-  return <div>OauthCallBack</div>
+}
+
+const OauthSuccess = () => {
+  const navigate = useNavigate()
+  const { state }  = useLocation()
+  const { accessCode } = state
+
+  if (accessCode !== '') {
+    ProcoreIframeContext.authentication.notifySuccess({ accessCode });
+    navigate('/')
+  } else {
+    console.error('Didnt fetch code.');
+  }
+
+  return <div>OauthSuccess</div>;
 }
 
 const Signin = () => {
@@ -101,13 +114,16 @@ const Signin = () => {
 }
 
 const MainPage = () => {
+  debugger
   const accessCode = useRecoilValue(accessCodeState)
+
   const jsonStyle = {
     paddingTop: '3rem'
   }
   // if (accessCode !== '') {
-  //   // let response = FetchProcoreOauthToken(accessCode)
+
   // }
+
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
@@ -131,8 +147,9 @@ function App() {
         <header className="App-header">
             <Routes>
               <Route path='/' exact element={ <MainPage /> } />
-              <Route path='/signin'exact element={<Signin />} />
-              <Route path='/oauth_success' element={<OauthSuccess />} />
+              <Route path='/signin' exact element={<Signin />} />
+              <Route path='/oauth_callback' exact element={<OauthCallback />} />
+              <Route path='/oauth_success' exact element={<OauthSuccess />} />
             </Routes>
         </header>
       </div>
