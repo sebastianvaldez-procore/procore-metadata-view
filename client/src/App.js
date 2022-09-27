@@ -93,6 +93,7 @@ const Signin = () => {
     ProcoreIframeContext.authentication.authenticate({
       url: procore_auth_url,
       onSuccess: ({accessCode}) => {
+        console.log('inside onSuccessfor notifySuccess', accessCode)
         setAccessCodeState(accessCode)
         navigate('/')
       },
