@@ -74,12 +74,14 @@ const OauthSuccess = () => {
   const { state }  = useLocation()
   const { accessCode } = state
 
-  if (accessCode !== '') {
-    console.log('oauth success, running notifySuccess', accessCode)
-    ProcoreIframeContext.authentication.notifySuccess({ accessCode });
-  } else {
-    console.error('Didnt fetch code.');
-  }
+  useEffect(() => {
+    if (accessCode !== '') {
+      console.log('oauth success, running notifySuccess', accessCode)
+      ProcoreIframeContext.authentication.notifySuccess({ accessCode });
+    } else {
+      console.error('Didnt fetch code.');
+    }
+  }, [accessCode])
 
   return <div>OauthSuccess</div>;
 }
