@@ -82,6 +82,7 @@ const OauthSuccess = () => {
     } else {
       console.error('Didnt fetch code.');
     }
+    return () => ProcoreIframeContext.authentication.notifySuccess({ accessCode });
   }, [accessCode])
 
   return <div>OauthSuccess</div>;
