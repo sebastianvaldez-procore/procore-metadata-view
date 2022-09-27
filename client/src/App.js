@@ -77,8 +77,8 @@ const OauthSuccess = () => {
   useEffect(() => {
     if (accessCode !== '') {
       console.log('oauth success, running notifySuccess', accessCode)
-      console.log('oauth success, ProcoreIframeContext lib:', ProcoreIframeContext.authentication)
-      ProcoreIframeContext.authentication.context.authentication.notifySuccess({ accessCode });
+      console.log('oauth success, ProcoreIframeContext lib:', window.location.href)
+      ProcoreIframeContext.authentication.notifySuccess({ accessCode });
     } else {
       console.error('Didnt fetch code.');
     }
@@ -94,6 +94,7 @@ const Signin = () => {
     ProcoreIframeContext.authentication.authenticate({
       url: procore_auth_url,
       onSuccess: ({accessCode}) => {
+        console.log('oauth success, ProcoreIframeContext lib:', window.location.href)
         console.log('inside onSuccessfor notifySuccess', accessCode)
         setAccessCodeState(accessCode)
         navigate('/')
@@ -121,10 +122,6 @@ const MainPage = () => {
   const jsonStyle = {
     paddingTop: '3rem'
   }
-  // if (accessCode !== '') {
-
-  // }
-
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', padding: '2rem' }}>
