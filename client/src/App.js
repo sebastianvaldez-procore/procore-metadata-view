@@ -77,6 +77,7 @@ const OauthSuccess = () => {
   useEffect(() => {
     if (accessCode !== '') {
       console.log('oauth success, running notifySuccess', accessCode)
+      console.log('oauth success, ProcoreIframeContext lib:', ProcoreIframeContext)
       ProcoreIframeContext.authentication.notifySuccess({ accessCode });
     } else {
       console.error('Didnt fetch code.');
