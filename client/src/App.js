@@ -78,12 +78,11 @@ const OauthSuccess = () => {
     if (accessCode !== '') {
       console.log('oauth success, running notifySuccess', accessCode)
       console.log('oauth success, ProcoreIframeContext lib:', ProcoreIframeContext.authentication)
-      ProcoreIframeContext.authentication.notifySuccess({ accessCode });
+      ProcoreIframeContext.authentication.context.authentication.notifySuccess({ accessCode });
     } else {
       console.error('Didnt fetch code.');
     }
   }, [accessCode])
-  ProcoreIframeContext.authentication.notifySuccess({ accessCode });
 }
 
 const Signin = () => {
